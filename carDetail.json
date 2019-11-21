@@ -1,0 +1,28 @@
+[
+  {
+    "lotNumber": "500671",
+    "country": "DEU",
+    "party": [{
+      "partyType": "SLR",
+      "partyID": 100
+    },{
+      "partyType": "MBR",
+      "partyId": 700
+    }],
+    "purchasePrice": 10000,
+    "salePrice": 15000
+  },
+  {
+    "lotNumber": "500672",
+    "country": "ESP",
+    "party": [{
+      "partyType": "SLR",
+      "partyID": 100
+    },{
+      "partyType": "MBR",
+      "partyId": 700
+    }],
+    "purchasePrice": 1000,
+    "salePrice": 2000
+  }
+]
