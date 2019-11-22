@@ -17,7 +17,6 @@ public class JsonRead {
             //Make hashMap of cars
             for(Object carInfo:jsonArray) {
                 org.json.simple.JSONObject car = (org.json.simple.JSONObject) carInfo;
-                org.json.simple.JSONArray party = car.getJSONArray("party");
                 String lotNumber = (String) car.get("lotNumber");
                 long purchasePrice = (Long) car.get("purchasePrice");
                 long salePrice = (Long) car.get("salePrice");
@@ -30,16 +29,49 @@ public class JsonRead {
             System.out.println("The information of Lot ID:500671 is "+cars.get("500671"));
 
             // Determine the seller who has the highest profit, cost, max price, average buyer price
+            //HIGHEST PROFIT
             long maxPrice = Integer.MIN_VALUE;
-            String seller;
+            String maxSeller = null;
             for(Map.Entry<String,HashMap<String,Object>> car: cars.entrySet()) {
-                if((long) car.getValue().get("profit") < maxPrice){
+                if((long) car.getValue().get("profit") > maxPrice){
                     maxPrice = (long) car.getValue().get("profit");
-
                     org.json.simple.JSONArray party = (org.json.simple.JSONArray) car.getValue().get("party");
-
+                    maxSeller = party.get(0).toString();
                 }
             }
+            System.out.println("The information of seller has the highest profit: "+maxSeller);
+
+            // HIGHEST LOSS
+            long minValue = Integer.MAX_VALUE;
+            String minSeller = null;
+            for(Map.Entry<String,HashMap<String,Object>> car: cars.entrySet()) {
+                if((long) car.getValue().get("profit") < minValue){
+                    maxPrice = (long) car.getValue().get("profit");
+                    org.json.simple.JSONArray party = (org.json.simple.JSONArray) car.getValue().get("party");
+                    minSeller = party.get(0).toString();
+                }
+            }
+            System.out.println("The information of seller has the highest LOSS: "+minSeller);
+
+            //MAX PRICED LOT
+            long maxLotPrice = Integer.MIN_VALUE;
+            String lotNumber = null;
+            for(Map.Entry<String,HashMap<String,Object>> car: cars.entrySet()) {
+                if((long) car.getValue().get("purchasePrice") > maxLotPrice){
+                    maxLotPrice = (long) car.getValue().get("purchasePrice");
+                    lotNumber = car.getKey();
+                }
+            }
+            System.out.println("The highest price of car is: "+ lotNumber);
+
+            //Average buyer price
+            long total = 0;
+            int number = 0;
+            for(Map.Entry<String,HashMap<String,Object>> car:cars.entrySet()){
+                total += (long) car.getValue().get("purchasePrice");
+                number++;
+            }
+            System.out.println("The average price is: "+total/number);
 
 
         }
@@ -91,6 +123,8 @@ public class JsonRead {
 //                taxOfCars.put(car.getKey(),tax);
 //            }
 //            System.out.println("car tax:"+taxOfCars);
+
+
     }
 
 
